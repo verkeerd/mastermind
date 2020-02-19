@@ -1173,8 +1173,6 @@ the_statistic_file = 'statistics'
 historic_file = 'history'
 
 
-# if __name__ == '__main__':
-#     play_portal(the_statistic_file, historic_file)
+if __name__ == '__main__':
+    play_portal(the_statistic_file, historic_file)
 
-while True:
-    play_teach_mastermind_quickly(the_statistic_file, historic_file, 10000)
