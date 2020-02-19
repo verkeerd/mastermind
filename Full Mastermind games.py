@@ -848,11 +848,8 @@ def get_random(S):
     """
     returns a random guess. Function is used to gather more random data for more robust statistics.
     """
-    print(len(S))
-    if len(S) < 1: # unbreaks the function when the list is too small for indexing
+    if len(S) < 1:  # unbreaks the function when the list is too small for indexing
         return S
-    # elif len(S) < 2:
-    #     return S[-1]
     return S[random.randrange(0, len(S))]   # returns a random element of the list.
 
 
@@ -981,6 +978,7 @@ def post_game(project_file, historic_file, library_temp, go):
     elif go <= 2:
         coefficient = 0.05
     data = change_statistics(data, library_temp, coefficient)  # changes the probability factors of all the guess
+    data['total'][str(go)] += 1
     with open(project_file, 'w') as json_file:                 # combinations and writes the new factors to the external
         json_content = json.dump(data, json_file, indent=4)    # 'statistics' file.
 
@@ -1029,6 +1027,7 @@ def play_strategy_quickly(project_file, historic_file):
     S_strings = make_strings(S)
 
     answer = get_random(S_strings)  # generates a random answer key
+    print(answer)
     go = 0
     library_temp = {}
 
@@ -1057,7 +1056,7 @@ def play_strategy_quickly(project_file, historic_file):
 
             guess = []
 
-            for i in code:      # converts the combination code into a tuple for the next function.
+            for i in code:  # converts the combination code into a tuple for the next function.
                 guess.append(i)
 
             S = kill_impossibles(S, guess, awardedBlack, awardedWhite)  # eliminates all combinations that are no longer
@@ -1081,7 +1080,7 @@ def ask_for_feedback_quickly(code, answer):
     print(f'''
     How many black pegs - correct colour and in the correct space? (0-4)''')
 
-    awardedBlack, answer = give_black_pins(code, answer)  # computer calculates the amount of awarded black pins to the
+    awardedBlack, code, answer = give_black_pins(code, answer)  # computer calculates the amount of awarded black pins to the
                                                           # code combination with the answer key.
 
     if awardedBlack == 4:  # stops the program if the code combination is correct.
@@ -1114,9 +1113,12 @@ def give_black_pins(code, answer):
             awardedBlack += 1               # adds a black pin if the chars are identical.
             if i == 3:
                 answer = answer[:-1] + 'X'  # removes the color from the answer sheet so it cannot
+                code = code[:-1] + 'O'
             else:                           # accidentally flag a white pin.
                 answer = answer[:i] + 'X' + answer[i + 1:]
-    return awardedBlack, answer
+                code = code[:i] + 'O' + code[i + 1:]
+    print(awardedBlack, answer)
+    return awardedBlack, code, answer
 
 
 def give_white_pins(code, answer):
@@ -1134,6 +1136,7 @@ def give_white_pins(code, answer):
                     answer = answer[:-1] + 'X'         # accidentally flag another guessed color.
                 else:
                     answer = answer[0:ans_index] + 'X' + answer[ans_index + 1:]
+    print(awardedWhite, answer)
     return awardedWhite
 
 
@@ -1169,5 +1172,9 @@ def play_portal(project_file, historic_file):
 the_statistic_file = 'statistics'
 historic_file = 'history'
 
-if __name__ == '__main__':
-    play_portal(the_statistic_file, historic_file)
+
+# if __name__ == '__main__':
+#     play_portal(the_statistic_file, historic_file)
+
+while True:
+    play_teach_mastermind_quickly(the_statistic_file, historic_file, 10000)
