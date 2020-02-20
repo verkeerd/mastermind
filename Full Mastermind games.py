@@ -571,6 +571,8 @@ def post_game_knuth(END, highlights, go):
 
 # The code written on line 9 to line 571 is written by ThomasS1 with a few revisions by me. (didn't necessarily make it
 # better. mainly brought a lot of variables out of the global scope.
+# https://repl.it/talk/share/~-Knuths-MASTERMIND-algorithm-in-Python-board-game-~/17435
+# https://repl.it/@ThomasS1
 
 
 def encode(correct, guess):
@@ -641,7 +643,7 @@ def play_game():
         print("------------------------------------")
 
 
-# line 575 to 643 are written by a collection of anonymous rosettacode.org community members.
+# line 576 to 644 are written by a collection of anonymous rosettacode.org community members.
 # https://www.rosettacode.org/wiki/Mastermind#Python
 
 
@@ -954,6 +956,9 @@ def kill_impossibles(S, guess, awardedBlack, awardedWhite):
             passed.append(pos)
     return passed[:]
 
+# the code on line 894 to 958 is written by ThomasS1 with a few revisions by me.
+# https://repl.it/talk/share/~-Knuths-MASTERMIND-algorithm-in-Python-board-game-~/17435
+# https://repl.it/@ThomasS1
 
 def post_game(project_file, historic_file, library_temp, go):
     """
