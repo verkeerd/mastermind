@@ -1165,7 +1165,7 @@ def play_portal(project_file, historic_file):
         elif root == 'T':
             play_teach_computer(project_file, historic_file)  # plays mastermind where the computer guesses your code
         elif root == 'STAT':                                  # according to what guess has the statistical advantage
-            play_teach_mastermind_quickly(project_file, historic_file, 10000)  # according to his earlier played games.
+            play_teach_mastermind_quickly(project_file, historic_file, 1000)  # according to his earlier played games.
         elif root == 'EXIT':
             quit()
         else:
